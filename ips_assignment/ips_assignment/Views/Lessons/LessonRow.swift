@@ -14,12 +14,14 @@ struct LessonRow: View {
             AsyncImage(url: URL(string:lesson.thumbnail)) { image in
                 image
                     .resizable()
-                    .frame(width:90,height:64)
-                    .aspectRatio(contentMode: .fit)
+                    .frame(width:110,height:64)
+                    .cornerRadius(6)
+//                    .aspectRatio(contentMode: .fit)
             } placeholder: {
                 Color.gray
             }
             Text(lesson.name)
+                .padding([.leading, .trailing], 6)
         }
     }
 }

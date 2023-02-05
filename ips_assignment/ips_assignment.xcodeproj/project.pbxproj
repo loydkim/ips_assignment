@@ -16,11 +16,14 @@
 		2B1B23B6298ECD6700C4149B /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C2B298EC26200BF60E4 /* Lesson.swift */; };
 		2B1B23B7298ECD7000C4149B /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C32298EC8C300BF60E4 /* ModelData.swift */; };
 		2B1B23B8298ECE4A00C4149B /* lessonData.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB34C30298EC88B00BF60E4 /* lessonData.json */; };
+		2BA59A05298FFE8F00F2D3B9 /* ApiProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA59A04298FFE8F00F2D3B9 /* ApiProviders.swift */; };
+		2BA59A062990013A00F2D3B9 /* ApiProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA59A04298FFE8F00F2D3B9 /* ApiProviders.swift */; };
 		2BB34C28298EC20000BF60E4 /* LessonList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C27298EC20000BF60E4 /* LessonList.swift */; };
 		2BB34C2A298EC21100BF60E4 /* LessonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C29298EC21100BF60E4 /* LessonRow.swift */; };
 		2BB34C2C298EC26200BF60E4 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C2B298EC26200BF60E4 /* Lesson.swift */; };
 		2BB79B10298F0B13002A625D /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C32298EC8C300BF60E4 /* ModelData.swift */; };
 		2BB79B12298F1223002A625D /* LessonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79B11298F1223002A625D /* LessonDetail.swift */; };
+		2BB79B15298F489C002A625D /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79B14298F489B002A625D /* AppColors.swift */; };
 		2BEC2E21298ED9E900F11147 /* LoadLessonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC2E20298ED9E900F11147 /* LoadLessonTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,12 +55,14 @@
 		2B0DA493298EB8910083627B /* ips_assignmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ips_assignmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B0DA497298EB8910083627B /* ips_assignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ips_assignmentUITests.swift; sourceTree = "<group>"; };
 		2B0DA499298EB8910083627B /* ips_assignmentUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ips_assignmentUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2BA59A04298FFE8F00F2D3B9 /* ApiProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProviders.swift; sourceTree = "<group>"; };
 		2BB34C27298EC20000BF60E4 /* LessonList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonList.swift; sourceTree = "<group>"; };
 		2BB34C29298EC21100BF60E4 /* LessonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonRow.swift; sourceTree = "<group>"; };
 		2BB34C2B298EC26200BF60E4 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		2BB34C30298EC88B00BF60E4 /* lessonData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lessonData.json; sourceTree = "<group>"; };
 		2BB34C32298EC8C300BF60E4 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		2BB79B11298F1223002A625D /* LessonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDetail.swift; sourceTree = "<group>"; };
+		2BB79B14298F489B002A625D /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		2BEC2E20298ED9E900F11147 /* LoadLessonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadLessonTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +119,8 @@
 				2BB34C25298EC13F00BF60E4 /* Model */,
 				2B0DA47F298EB8900083627B /* Assets.xcassets */,
 				2B0DA481298EB8900083627B /* ips_assignment.entitlements */,
+				2BA59A03298FFE7E00F2D3B9 /* Providers */,
+				2BB79B13298F4886002A625D /* Theme */,
 				2BB34C2D298EC83100BF60E4 /* Resources */,
 				2B0DA482298EB8900083627B /* Preview Content */,
 			);
@@ -154,6 +161,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		2BA59A03298FFE7E00F2D3B9 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				2BA59A04298FFE8F00F2D3B9 /* ApiProviders.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
 		2BB34C24298EC13000BF60E4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +202,14 @@
 				2BB34C30298EC88B00BF60E4 /* lessonData.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		2BB79B13298F4886002A625D /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				2BB79B14298F489B002A625D /* AppColors.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,7 +347,9 @@
 				2B0DA47E298EB8900083627B /* ContentView.swift in Sources */,
 				2B0DA47C298EB8900083627B /* IPSAssignmentApp.swift in Sources */,
 				2BB79B12298F1223002A625D /* LessonDetail.swift in Sources */,
+				2BA59A05298FFE8F00F2D3B9 /* ApiProviders.swift in Sources */,
 				2BB34C2A298EC21100BF60E4 /* LessonRow.swift in Sources */,
+				2BB79B15298F489C002A625D /* AppColors.swift in Sources */,
 				2BB34C28298EC20000BF60E4 /* LessonList.swift in Sources */,
 				2BB79B10298F0B13002A625D /* ModelData.swift in Sources */,
 			);
@@ -335,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BEC2E21298ED9E900F11147 /* LoadLessonTests.swift in Sources */,
+				2BA59A062990013A00F2D3B9 /* ApiProviders.swift in Sources */,
 				2B1B23B6298ECD6700C4149B /* Lesson.swift in Sources */,
 				2B1B23B7298ECD7000C4149B /* ModelData.swift in Sources */,
 			);
@@ -487,6 +513,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = IPS_Loyd;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -525,6 +552,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = IPS_Loyd;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

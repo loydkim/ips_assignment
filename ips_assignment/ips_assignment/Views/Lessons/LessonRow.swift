@@ -11,6 +11,8 @@ struct LessonRow: View {
     var lesson: Lesson
     var body: some View{
         HStack {
+            // TODO: This View is available iOS 15.0.
+            // Should consider under 15 version user
             AsyncImage(url: URL(string:lesson.thumbnail)) { image in
                 image
                     .resizable()
@@ -18,8 +20,11 @@ struct LessonRow: View {
                     .cornerRadius(6)
 //                    .aspectRatio(contentMode: .fit)
             } placeholder: {
-                Color.gray
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(.gray)
+                    .frame(width:110,height:64)
             }
+
             Text(lesson.name)
                 .padding([.leading, .trailing], 6)
         }

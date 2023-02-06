@@ -18,6 +18,7 @@ struct LessonList: View {
         NavigationView {
             List {
                 ForEach(lessons) { lesson in
+                    // TODO: When touch the row, the background color should change
                     ZStack {
                         NavigationLink(destination: LessonDetail()) {
                             EmptyView()

@@ -19,7 +19,6 @@ class ApiProvider : ObservableObject{
         let request = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 60.0)
 
         if let data = URLCache.shared.cachedResponse(for: request)?.data {
-            print("got image from cache")
             // TODO: Add image cache [ Reference link: https://levelup.gitconnected.com/image-caching-with-urlcache-4eca5afb543a ]
             if let decoder = try? JSONDecoder().decode([String:[Lesson]].self, from: data){
                 let lessons:[Lesson] = decoder["lessons"] ?? []
@@ -32,7 +31,6 @@ class ApiProvider : ObservableObject{
                 }
             }
         } else {
-            print("got image from server")
             URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
                 if let data = data,
                    let decoder = try? JSONDecoder().decode([String:[Lesson]].self, from: data)

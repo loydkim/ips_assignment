@@ -14,13 +14,17 @@ struct LessonList: View {
     }
     @State var lessons: [Lesson] = []
     
+//    init(){
+//        UINavigationBar.appearance().backgroundColor = UIColor.systemGray5
+//    }
+    
     var body: some View{
         NavigationView {
             List {
                 ForEach(lessons) { lesson in
                     // TODO: When touch the row, the background color should change
                     ZStack {
-                        NavigationLink(destination: LessonDetail()) {
+                        NavigationLink(destination: LessonDetailViewControllerWrapper(lesson: lesson)) {
                             EmptyView()
                         }
                         
@@ -36,13 +40,13 @@ struct LessonList: View {
                         }
                         .foregroundColor(Color(UIColor.label))
                     }
-                    .listRowBackground(viewBG)
-                    .background(viewBG)
+//                    .listRowBackground(viewBG)
+//                    .background(viewBG)
                 }
             }
             .listStyle(InsetListStyle())
             .padding(.top,16)
-            .background(viewBG)
+//            .background(viewBG)
             .onAppear{
                 ApiProvider().loadData { lessons in
                     self.lessons = lessons
@@ -50,7 +54,6 @@ struct LessonList: View {
             }
             .navigationTitle("Lessons")
             .scrollContentBackground(.hidden)
-            
         }
     }
 }

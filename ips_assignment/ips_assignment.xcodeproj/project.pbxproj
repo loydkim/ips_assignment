@@ -23,7 +23,6 @@
 		2BB34C2C298EC26200BF60E4 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C2B298EC26200BF60E4 /* Lesson.swift */; };
 		2BB79B10298F0B13002A625D /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C32298EC8C300BF60E4 /* ModelData.swift */; };
 		2BB79B12298F1223002A625D /* LessonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79B11298F1223002A625D /* LessonDetailViewController.swift */; };
-		2BB79B15298F489C002A625D /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79B14298F489B002A625D /* AppColors.swift */; };
 		2BEC2E21298ED9E900F11147 /* LoadLessonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC2E20298ED9E900F11147 /* LoadLessonTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +61,6 @@
 		2BB34C30298EC88B00BF60E4 /* lessonData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lessonData.json; sourceTree = "<group>"; };
 		2BB34C32298EC8C300BF60E4 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		2BB79B11298F1223002A625D /* LessonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDetailViewController.swift; sourceTree = "<group>"; };
-		2BB79B14298F489B002A625D /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		2BEC2E20298ED9E900F11147 /* LoadLessonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadLessonTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,7 +119,6 @@
 				2B0DA47F298EB8900083627B /* Assets.xcassets */,
 				2B0DA481298EB8900083627B /* ips_assignment.entitlements */,
 				2BA59A03298FFE7E00F2D3B9 /* Providers */,
-				2BB79B13298F4886002A625D /* Theme */,
 				2BB34C2D298EC83100BF60E4 /* Resources */,
 				2B0DA482298EB8900083627B /* Preview Content */,
 			);
@@ -210,14 +207,6 @@
 				2BB34C30298EC88B00BF60E4 /* lessonData.json */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		2BB79B13298F4886002A625D /* Theme */ = {
-			isa = PBXGroup;
-			children = (
-				2BB79B14298F489B002A625D /* AppColors.swift */,
-			);
-			path = Theme;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,7 +346,6 @@
 				2BB79B12298F1223002A625D /* LessonDetailViewController.swift in Sources */,
 				2BA59A05298FFE8F00F2D3B9 /* ApiProviders.swift in Sources */,
 				2BB34C2A298EC21100BF60E4 /* LessonRow.swift in Sources */,
-				2BB79B15298F489C002A625D /* AppColors.swift in Sources */,
 				2BB34C28298EC20000BF60E4 /* LessonList.swift in Sources */,
 				2BB79B10298F0B13002A625D /* ModelData.swift in Sources */,
 			);

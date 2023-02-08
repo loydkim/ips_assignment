@@ -21,10 +21,10 @@ struct LessonList: View {
     var body: some View{
         NavigationView {
             List {
-                ForEach(lessons) { lesson in
+                ForEach(Array(lessons.enumerated()), id: \.offset) { index, lesson in
                     // TODO: When touch the row, the background color should change
                     ZStack {
-                        NavigationLink(destination: LessonDetailViewControllerWrapper(lesson: lesson)) {
+                        NavigationLink(destination: LessonDetailViewControllerWrapper(index: index, lessons: lessons)) {
                             EmptyView()
                         }
                         

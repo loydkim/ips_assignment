@@ -13,6 +13,7 @@
 		2B0DA484298EB8900083627B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B0DA483298EB8900083627B /* Preview Assets.xcassets */; };
 		2B0DA498298EB8910083627B /* ips_assignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0DA497298EB8910083627B /* ips_assignmentUITests.swift */; };
 		2B0DA49A298EB8910083627B /* ips_assignmentUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0DA499298EB8910083627B /* ips_assignmentUITestsLaunchTests.swift */; };
+		2B118A9129944C21008038DE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B118A9029944C21008038DE /* Reachability.swift */; };
 		2B1B23B6298ECD6700C4149B /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C2B298EC26200BF60E4 /* Lesson.swift */; };
 		2B1B23B7298ECD7000C4149B /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C32298EC8C300BF60E4 /* ModelData.swift */; };
 		2B1B23B8298ECE4A00C4149B /* lessonData.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB34C30298EC88B00BF60E4 /* lessonData.json */; };
@@ -54,6 +55,7 @@
 		2B0DA493298EB8910083627B /* ips_assignmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ips_assignmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B0DA497298EB8910083627B /* ips_assignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ips_assignmentUITests.swift; sourceTree = "<group>"; };
 		2B0DA499298EB8910083627B /* ips_assignmentUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ips_assignmentUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2B118A9029944C21008038DE /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		2BA59A04298FFE8F00F2D3B9 /* ApiProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProviders.swift; sourceTree = "<group>"; };
 		2BB34C27298EC20000BF60E4 /* LessonList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonList.swift; sourceTree = "<group>"; };
 		2BB34C29298EC21100BF60E4 /* LessonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonRow.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				2BA59A04298FFE8F00F2D3B9 /* ApiProviders.swift */,
+				2B118A9029944C21008038DE /* Reachability.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				2B0DA47C298EB8900083627B /* IPSAssignmentApp.swift in Sources */,
 				2BB79B12298F1223002A625D /* LessonDetailViewController.swift in Sources */,
 				2BA59A05298FFE8F00F2D3B9 /* ApiProviders.swift in Sources */,
+				2B118A9129944C21008038DE /* Reachability.swift in Sources */,
 				2BB34C2A298EC21100BF60E4 /* LessonRow.swift in Sources */,
 				2BB34C28298EC20000BF60E4 /* LessonList.swift in Sources */,
 				2BB79B10298F0B13002A625D /* ModelData.swift in Sources */,

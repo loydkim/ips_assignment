@@ -14,6 +14,8 @@
 		2B0DA498298EB8910083627B /* ips_assignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0DA497298EB8910083627B /* ips_assignmentUITests.swift */; };
 		2B0DA49A298EB8910083627B /* ips_assignmentUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0DA499298EB8910083627B /* ips_assignmentUITestsLaunchTests.swift */; };
 		2B118A9129944C21008038DE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B118A9029944C21008038DE /* Reachability.swift */; };
+		2B118A9429947659008038DE /* DownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B118A9329947659008038DE /* DownloadButton.swift */; };
+		2B118A9729947D35008038DE /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B118A9629947D35008038DE /* AppColors.swift */; };
 		2B1B23B6298ECD6700C4149B /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C2B298EC26200BF60E4 /* Lesson.swift */; };
 		2B1B23B7298ECD7000C4149B /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB34C32298EC8C300BF60E4 /* ModelData.swift */; };
 		2B1B23B8298ECE4A00C4149B /* lessonData.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BB34C30298EC88B00BF60E4 /* lessonData.json */; };
@@ -56,6 +58,8 @@
 		2B0DA497298EB8910083627B /* ips_assignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ips_assignmentUITests.swift; sourceTree = "<group>"; };
 		2B0DA499298EB8910083627B /* ips_assignmentUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ips_assignmentUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2B118A9029944C21008038DE /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		2B118A9329947659008038DE /* DownloadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadButton.swift; sourceTree = "<group>"; };
+		2B118A9629947D35008038DE /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		2BA59A04298FFE8F00F2D3B9 /* ApiProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProviders.swift; sourceTree = "<group>"; };
 		2BB34C27298EC20000BF60E4 /* LessonList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonList.swift; sourceTree = "<group>"; };
 		2BB34C29298EC21100BF60E4 /* LessonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonRow.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 				2BB34C25298EC13F00BF60E4 /* Model */,
 				2B0DA47F298EB8900083627B /* Assets.xcassets */,
 				2B0DA481298EB8900083627B /* ips_assignment.entitlements */,
+				2B118A9529947D24008038DE /* Style */,
 				2BA59A03298FFE7E00F2D3B9 /* Providers */,
 				2BB34C2D298EC83100BF60E4 /* Resources */,
 				2B0DA482298EB8900083627B /* Preview Content */,
@@ -151,6 +156,22 @@
 				2B0DA499298EB8910083627B /* ips_assignmentUITestsLaunchTests.swift */,
 			);
 			path = ips_assignmentUITests;
+			sourceTree = "<group>";
+		};
+		2B118A92299473A5008038DE /* LessonDetailHelper */ = {
+			isa = PBXGroup;
+			children = (
+				2B118A9329947659008038DE /* DownloadButton.swift */,
+			);
+			path = LessonDetailHelper;
+			sourceTree = "<group>";
+		};
+		2B118A9529947D24008038DE /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				2B118A9629947D35008038DE /* AppColors.swift */,
+			);
+			path = Style;
 			sourceTree = "<group>";
 		};
 		2B1B23B3298ECC9100C4149B /* Model */ = {
@@ -200,6 +221,7 @@
 			children = (
 				2BB34C27298EC20000BF60E4 /* LessonList.swift */,
 				2BB34C29298EC21100BF60E4 /* LessonRow.swift */,
+				2B118A92299473A5008038DE /* LessonDetailHelper */,
 			);
 			path = Lessons;
 			sourceTree = "<group>";
@@ -347,11 +369,13 @@
 				2B0DA47E298EB8900083627B /* ContentView.swift in Sources */,
 				2B0DA47C298EB8900083627B /* IPSAssignmentApp.swift in Sources */,
 				2BB79B12298F1223002A625D /* LessonDetailViewController.swift in Sources */,
+				2B118A9729947D35008038DE /* AppColors.swift in Sources */,
 				2BA59A05298FFE8F00F2D3B9 /* ApiProviders.swift in Sources */,
 				2B118A9129944C21008038DE /* Reachability.swift in Sources */,
 				2BB34C2A298EC21100BF60E4 /* LessonRow.swift in Sources */,
 				2BB34C28298EC20000BF60E4 /* LessonList.swift in Sources */,
 				2BB79B10298F0B13002A625D /* ModelData.swift in Sources */,
+				2B118A9429947659008038DE /* DownloadButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

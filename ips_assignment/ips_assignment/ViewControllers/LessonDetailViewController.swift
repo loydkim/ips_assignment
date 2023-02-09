@@ -24,81 +24,90 @@ struct LessonDetailViewControllerWrapper: UIViewControllerRepresentable{
     func updateUIViewController(_ uiViewController: LessonDetailViewController, context: Context) { }
 }
 
-class LessonDetailViewController: UIViewController, URLSessionDownloadDelegate{
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        
-        let docsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let destinationUrl = docsUrl.appendingPathComponent("lessonVideo\(index).mp4")
-        
-        do{
-            try FileManager().moveItem(at: location, to: destinationUrl)
-            print("finish download")
-            DispatchQueue.main.async { [self] in
-                downloadAlertView!.dismiss(animated: true)
-                
-                let alert = UIAlertController(title: "Alert", message: "Download Completed", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-        } catch{
-            fatalError("Couldn't load \(destinationUrl.absoluteString) from main bundle:\n\(error)")
-        }
-    }
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        let percentDownloaded = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
-        print("percentage is \(percentDownloaded)")
-        DispatchQueue.main.async { [self] in
-            print("\(Int(percentDownloaded * 100))%")
-            downloadProgressView.progress = Float(percentDownloaded)
-        }
-    }
-    
+class LessonDetailViewController: UIViewController{
     var index: Int = 0
     var lessons: [Lesson]?
-    
     var lesson: Lesson?
     
+    // Design
     private let thumbnailView: UIImageView = UIImageView()
     private let nameLabel: UILabel = UILabel()
     private let descriptionLabel: UILabel = UILabel()
     private let nextLessonButton = UIButton()
-    private let rightTopButton : UIButton = UIButton(type: .custom)
     
-    private let buttonColor = UIColor(red: 41/255, green: 114/255, blue: 217/255, alpha: 1.0)
+    // Download variables
     private var downloadVideoSesson: URLSession?
     private var downloadTask: URLSessionDownloadTask?
     
     private let downloadProgressView = UIProgressView()
     private var downloadAlertView: UIAlertController?
     
+    private var destinationUrl: URL?
+    
+    // MARK: View Controller life cycle
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        rightTopButton.setImage(UIImage(systemName: "icloud.and.arrow.down"), for: .normal)
-        rightTopButton.tintColor = buttonColor
-        rightTopButton.setTitle("  Download", for: .normal)
-        rightTopButton.setTitleColor(buttonColor, for: .normal)
-        rightTopButton.addTarget(self, action: #selector(self.downloadVideo(_:)), for: .touchUpInside)
-        rightTopButton.frame.size = CGSize(width: 80, height: 30)
-        
-        let rightBarButtonItem = UIBarButtonItem(customView: rightTopButton)
-        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = rightBarButtonItem
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: DownloadButton(target: self, selector: #selector(self.downloadVideo(_:))))
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        lesson = lessons![index]
+        // TODO: the screen should be available scrolling for small screen sizes.
+//        setupScrollView()
+        downloadVideoSesson = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue())
+        destinationUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("lessonVideo\(index).mp4")
+        initChildViews()
+    }
+    
+    // MARK: Button Events
+    
+    @objc func nextLesson(sender : UIButton) {
+        index += 1
+        if (index < lessons!.count){
+            lesson = lessons![index]
+            setLesson()
+        }else{
+            nextLessonButton.removeFromSuperview()
+        }
+    }
+    
+    @objc func playMovie(sender : UIButton) {
+        if Reachability.isConnectedToNetwork(){
+            if let url = URL(string: lesson!.video_url){
+                let player = AVPlayer(url: url)
+                        
+                let playerViewController = AVPlayerViewController()
+                playerViewController.player = player
+                
+                self.present(playerViewController, animated: true) { playerViewController.player?.play() }
+            }
+        }else{
+            if(FileManager().fileExists(atPath: destinationUrl!.path)){
+                let player = AVPlayer(playerItem: AVPlayerItem(asset: AVAsset(url: destinationUrl!)))
+
+                let playerViewController = AVPlayerViewController()
+                playerViewController.player = player
+
+                self.present(playerViewController, animated: true) { playerViewController.player?.play() }
+            }else{
+                let alert = UIAlertController(title: "Alert", message: "You can't play the video", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     @objc func downloadVideo(_ sender: Any?) {
-
-        let destinationUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("lessonVideo\(index).mp4")
         
-        if(FileManager().fileExists(atPath: destinationUrl.path)){
-            print("\n\nfile already exists\n\n")
-            print(destinationUrl)
+        if(FileManager().fileExists(atPath: destinationUrl!.path)){
+            print("file already exists")
             let alert = UIAlertController(title: "Alert", message: "You already downloaded", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
         }
         else{
-            
             if Reachability.isConnectedToNetwork(){
                 let videoUrl = lesson!.video_url
 
@@ -127,57 +136,7 @@ class LessonDetailViewController: UIViewController, URLSessionDownloadDelegate{
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        lesson = lessons![index]
-        // TODO: the screen should be available scrolling for small screen sizes.
-//        setupScrollView()
-        downloadVideoSesson = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue())
-        initChildViews()
-    }
-    
-    @objc func nextLesson(sender : UIButton) {
-        index += 1
-        if (index < lessons!.count){
-            lesson = lessons![index]
-            setLesson()
-        }else{
-            nextLessonButton.removeFromSuperview()
-        }
-    }
-    
-    @objc func playMovie(sender : UIButton) {
-        if Reachability.isConnectedToNetwork(){
-            print("Internet Connection Available!")
-            if let url = URL(string: lesson!.video_url){
-                let player = AVPlayer(url: url)
-                        
-                let vc = AVPlayerViewController()
-                vc.player = player
-                
-                self.present(vc, animated: true) { vc.player?.play() }
-            }
-        }else{
-            print("Internet Connection not Available!")
-            let destinationUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("lessonVideo\(index).mp4")
-            
-            if(FileManager().fileExists(atPath: destinationUrl.path)){
-                let player = AVPlayer(playerItem: AVPlayerItem(asset: AVAsset(url: destinationUrl)))
-
-                let playerViewController = AVPlayerViewController()
-                playerViewController.player = player
-
-                self.present(playerViewController, animated: true, completion: {
-                    player.play()
-                })
-            }else{
-                let alert = UIAlertController(title: "Alert", message: "You can't play the video", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                present(alert, animated: true, completion: nil)
-            }
-        }
-        
-    }
+    // MARK: Modify Views
     
     private func setLesson() {
         DispatchQueue.global().async { [weak self] in
@@ -207,11 +166,8 @@ class LessonDetailViewController: UIViewController, URLSessionDownloadDelegate{
         thumbnailView.heightAnchor.constraint(equalToConstant: 210).isActive = true
         
         let playButton = UIButton()
-//        playButton.frame = CGRect(x: 0, y: 0, width: 350, height: 350)
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         playButton.tintColor = UIColor.white
-//        playButton.setTitle("Next Lesson >", for: .normal)
-//        playButton.setTitleColor(UIColor(red: 41/255, green: 101/255, blue: 250/255, alpha: 1.0), for: .normal)
         playButton.addTarget(self, action: #selector(self.playMovie), for: .touchUpInside)
         self.view.addSubview(playButton)
         
@@ -224,7 +180,6 @@ class LessonDetailViewController: UIViewController, URLSessionDownloadDelegate{
         playButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
         nameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 26)
-        
         nameLabel.lineBreakMode = .byWordWrapping
         nameLabel.numberOfLines = 0
         self.view.addSubview(nameLabel)
@@ -258,6 +213,31 @@ class LessonDetailViewController: UIViewController, URLSessionDownloadDelegate{
             nextLessonButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }else{
             nextLessonButton.removeFromSuperview()
+        }
+    }
+}
+
+extension LessonDetailViewController: URLSessionDownloadDelegate{
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        do{
+            try FileManager().moveItem(at: location, to: destinationUrl!)
+            print("finish download")
+            DispatchQueue.main.async { [self] in
+                downloadAlertView!.dismiss(animated: true)
+                let alert = UIAlertController(title: "Alert", message: "Download Completed", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        } catch{
+            fatalError("Couldn't load \(destinationUrl!.absoluteString) from main bundle:\n\(error)")
+        }
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        let percentDownloaded = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
+        print("percentage is \(percentDownloaded)")
+        DispatchQueue.main.async { [self] in
+            downloadProgressView.progress = Float(percentDownloaded)
         }
     }
 }

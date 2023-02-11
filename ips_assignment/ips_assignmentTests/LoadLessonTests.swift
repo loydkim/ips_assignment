@@ -8,7 +8,8 @@
 import XCTest
 
 final class LoadLessonTests: XCTestCase {
-    var lessons:[Lesson]?
+    private var lessons:[Lesson]?
+    
     override func setUpWithError() throws {
         lessons = ModelData().lessons
     }
@@ -17,10 +18,20 @@ final class LoadLessonTests: XCTestCase {
         lessons = nil
     }
     
-    func loadLessonsFromURL() throws {
-        ApiProvider().loadData { [self] result in
-            self.lessons = result
-            XCTAssertFalse(lessons!.isEmpty)
+    func testLoadLessonsFromURL() async throws {
+        let url = URL(string: "https://iphonephotographyschool.com/test-api/lessons")!
+        
+        let dataAndResponse: (data: Data, response: URLResponse) = try await URLSession.shared.data(from: url, delegate: nil)
+        
+        let httpResponse = try XCTUnwrap(dataAndResponse.response as? HTTPURLResponse, "Expected an HTTPURLResponse.")
+        XCTAssertEqual(httpResponse.statusCode, 200, "Expected a 200 OK response.")
+        
+        if let decoder = try? JSONDecoder().decode([String:[Lesson]].self, from: dataAndResponse.data)
+        {
+            let lessons:[Lesson] = decoder["lessons"] ?? []
+            XCTAssertEqual(lessons.count, 11)
+        }else{
+            XCTAssertThrowsError("Decoder is not Lesson list type")
         }
     }
 

@@ -25,15 +25,43 @@ struct LessonDetailViewControllerWrapper: UIViewControllerRepresentable{
 }
 
 class LessonDetailViewController: UIViewController{
+    // Data
     var index: Int = 0
     var lessons: [Lesson]?
     var lesson: Lesson?
     
     // Design
-    private let thumbnailView: UIImageView = UIImageView()
-    private let nameLabel: UILabel = UILabel()
-    private let descriptionLabel: UILabel = UILabel()
-    private let nextLessonButton = UIButton()
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    
+    private let thumbnailView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .systemGray2
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 26)
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let nextLessonButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Next Lesson >", for: .normal)
+        button.setTitleColor(buttonColor, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     // Download variables
     private var downloadVideoSesson: URLSession?
@@ -54,11 +82,10 @@ class LessonDetailViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         lesson = lessons![index]
-        // TODO: the screen should be available scrolling for small screen sizes.
-//        setupScrollView()
         downloadVideoSesson = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue())
         destinationUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("lessonVideo\(index).mp4")
-        initChildViews()
+        setupScrollView()
+        setupChildViews()
     }
     
     // MARK: Button Events
@@ -155,63 +182,59 @@ class LessonDetailViewController: UIViewController{
         }
     }
     
-    private func initChildViews() {
-        thumbnailView.backgroundColor = .systemGray2
-        self.view.addSubview(thumbnailView)
-        
-        thumbnailView.translatesAutoresizingMaskIntoConstraints = false
-        thumbnailView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        thumbnailView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        thumbnailView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1).isActive = true
+    private func setupScrollView() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+    }
+    
+    private func setupChildViews(){
+        contentView.addSubview(thumbnailView)
+        thumbnailView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        thumbnailView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        thumbnailView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1).isActive = true
         thumbnailView.heightAnchor.constraint(equalToConstant: 210).isActive = true
-        
+
         let playButton = UIButton()
-        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playButton.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 45, weight: .medium, scale: .default)), for: .normal)
         playButton.tintColor = UIColor.white
         playButton.addTarget(self, action: #selector(self.playMovie), for: .touchUpInside)
         self.view.addSubview(playButton)
-        
+
         playButton.translatesAutoresizingMaskIntoConstraints = false
         playButton.centerXAnchor.constraint(equalTo: thumbnailView.centerXAnchor).isActive = true
         playButton.centerYAnchor.constraint(equalTo: thumbnailView.centerYAnchor).isActive = true
-        
-        // TODO: Need to increase play button. It doesn't work.
-        playButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        playButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        nameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 26)
-        nameLabel.lineBreakMode = .byWordWrapping
-        nameLabel.numberOfLines = 0
-        self.view.addSubview(nameLabel)
-        
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14).isActive = true
+
+        contentView.addSubview(nameLabel)
+        nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14).isActive = true
         nameLabel.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor, constant: 20).isActive = true
-        nameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
-        
-        descriptionLabel.lineBreakMode = .byWordWrapping
-        descriptionLabel.numberOfLines = 0
-        self.view.addSubview(descriptionLabel)
-        
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 14).isActive = true
+        nameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.8).isActive = true
+
+        contentView.addSubview(descriptionLabel)
+        descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20).isActive = true
-        descriptionLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
-        
+        descriptionLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.8).isActive = true
+
         setLesson()
-        
+
         if(index < lessons!.count - 1){
-            nextLessonButton.setTitle("Next Lesson >", for: .normal)
-            nextLessonButton.setTitleColor(buttonColor, for: .normal)
             nextLessonButton.addTarget(self, action: #selector(self.nextLesson), for: .touchUpInside)
-            self.view.addSubview(nextLessonButton)
-            
-            nextLessonButton.translatesAutoresizingMaskIntoConstraints = false
-            nextLessonButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 10).isActive = true
+            contentView.addSubview(nextLessonButton)
+            nextLessonButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 10).isActive = true
             nextLessonButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10).isActive = true
             nextLessonButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
-            nextLessonButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            nextLessonButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         }else{
+            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
             nextLessonButton.removeFromSuperview()
         }
     }

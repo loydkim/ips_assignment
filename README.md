@@ -1,7 +1,5 @@
 # IPS Assignment - by loyd
 
-✅ Done List
-
 Lessons list screen: 
 
 - Show title “Lessons”
@@ -20,16 +18,7 @@ Lesson details screen:
 - Show a “Next lesson” button to play next lesson from the list
 - Show video in full screen when app rotates to landscape
 
-📝 TODO List
-
 Testing
 
 - Write unit and UI automated tests with XCTest. 
 - Tests have to be meaningful and comprehensive and cover all important functionality of the app.
-
-Noted for modified
-
-- Have to change AsyncImage class to other ( The 'AsyncImage' class available more iOS 15.0. Should consider under 15 version phone )
-- The detail View screen should be available scrolling for small screen sizes.
-- Play Button in detail view is small.
-- When caches, the image also should be cached [ Reference link: https://levelup.gitconnected.com/image-caching-with-urlcache-4eca5afb543a]
